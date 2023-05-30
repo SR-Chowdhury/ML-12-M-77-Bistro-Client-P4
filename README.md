@@ -2,6 +2,7 @@
 
 * 77-1 Module Introduction
 * 77-2 API naming convention and API to save Cart
+* 77-3 Save Cart data to the server
 
 
 ## react-boilerplate-2
