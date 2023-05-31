@@ -6,6 +6,7 @@
 * 77-4 Simple Overview of React Query and load data (Using Tanstack Query)
 * 77-5 (Interesting) Show add to cart count on navbar 
 * 77-6 Create Dashboard route and Dashboard navigation
+* 77-8 Display cart items to review before order
 
 
 ## react-boilerplate-2
