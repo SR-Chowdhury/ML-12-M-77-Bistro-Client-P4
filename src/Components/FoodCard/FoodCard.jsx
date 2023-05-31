@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router-dom';
+import useCart from '../../Hooks/useCart';
 
 const FoodCard = ({ item }) => {
 
@@ -9,6 +10,8 @@ const FoodCard = ({ item }) => {
     const { _id, name, recipe, image, category, price } = item;
     const navigate = useNavigate();
     const location = useLocation();
+
+    const [, refetch] = useCart();
 
     const handleCart = (item) => {
 
@@ -34,6 +37,7 @@ const FoodCard = ({ item }) => {
                                 popup: 'animate__animated animate__fadeOutUp'
                             }
                         })
+                        refetch();
                     }
                 })
                 .catch(err => console.log(err.message))
