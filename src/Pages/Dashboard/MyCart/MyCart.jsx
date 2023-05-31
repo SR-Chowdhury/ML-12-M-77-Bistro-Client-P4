@@ -2,19 +2,45 @@ import React from 'react';
 import ReactHelmet from '../../../Components/ReactHelmet/ReactHelmet';
 import useCart from '../../../Hooks/useCart';
 import SectionTitle from '../../../Components/SectionTitle/SectionTitle';
+import Swal from 'sweetalert2';
 import './MyCart.css';
 
 const MyCart = () => {
 
-    const [cart] = useCart();
+    const [cart, refetch] = useCart();
     const totalPrice = cart.reduce((sum, item) => item.price + sum, 0);
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/carts/${id}`, {
-            method: 'DELETE'
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/carts/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+                    .catch(err => console.log(err.message))
+            }
         })
-        .then(data => console.log(data))
-        .catch(err => console.log(err.message))
+
+
     }
 
     return (
@@ -56,7 +82,7 @@ const MyCart = () => {
                                             <td>${item.price}</td>
                                             <th>
                                                 <button className="btn btn-ghost btn-xs">Edit</button>
-                                                <button onClick={ () => handleDelete(item._id)} className="btn btn-ghost text-red-500 btn-xs">Delete</button>
+                                                <button onClick={() => handleDelete(item._id)} className="btn btn-ghost text-red-500 btn-xs">Delete</button>
                                             </th>
                                         </tr>
 
@@ -65,7 +91,7 @@ const MyCart = () => {
                             </tbody>
                         </table>
                     </div>
-                   
+
                 </div>
             </div>
         </div>

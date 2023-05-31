@@ -1,7 +1,11 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+import useCart from '../Hooks/useCart';
 
 const Dashboard = () => {
+
+    const [cart] = useCart();
+
     return (
         <div>
             <div className="drawer drawer-mobile">
@@ -16,7 +20,7 @@ const Dashboard = () => {
                         <li><NavLink to="/dashboard/home">Dasboard Home</NavLink></li>
                         <li><NavLink to="/dashboard/reservation">Reservation</NavLink></li>
                         <li><NavLink to="/dashboard/history">Payment History</NavLink></li>
-                        <li><NavLink to="/dashboard/mycart">My Cart</NavLink></li>
+                        <li><NavLink to="/dashboard/mycart">My Cart [+{cart?.length || 0}]</NavLink></li>
                         <div className="divider"></div> 
                         <li><NavLink to="/">Home</NavLink></li>
                         <li><NavLink to="/menu">Menu</NavLink></li>

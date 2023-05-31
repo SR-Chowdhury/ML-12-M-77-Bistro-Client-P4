@@ -7,6 +7,7 @@
 * 77-5 (Interesting) Show add to cart count on navbar 
 * 77-6 Create Dashboard route and Dashboard navigation
 * 77-8 Display cart items to review before order
+* 77-9 Delete cart item and sync data using refetch 
 
 
 ## react-boilerplate-2
